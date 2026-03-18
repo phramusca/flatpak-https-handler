@@ -1,6 +1,4 @@
-# Packages
-
-## flatpak-https-handler
+# flatpak-https-handler
 
 Handler for **flatpak+https** URLs (Flathub “Install” pages). Install the script into `/usr/bin/` and the `.desktop` file into `/usr/share/applications/` with a fixed `Exec=` path (works for all users).
 
@@ -9,17 +7,17 @@ Handler for **flatpak+https** URLs (Flathub “Install” pages). Install the sc
 From the repository root:
 
 ```bash
-cd packages && chmod +x build-flatpak-https-handler.sh && ./build-flatpak-https-handler.sh
+./build-flatpak-https-handler.sh
 ```
 
-The package is created as: `packages/flatpak-https-handler_1.0_all.deb`.
+The package is created as: `flatpak-https-handler_1.0_all.deb` (in the repository root).
 
 **Prerequisite**: `fakeroot` (otherwise `sudo apt install fakeroot`).
 
 ### Install
 
 ```bash
-sudo dpkg -i packages/flatpak-https-handler_1.0_all.deb
+sudo dpkg -i flatpak-https-handler_1.0_all.deb
 ```
 
 Dependencies: `curl`, `xdg-utils`. The **postinst** script automatically registers the handler for the user who ran `sudo dpkg -i`. Other users on the same machine must run it once:
@@ -116,12 +114,12 @@ Restart Firefox (or your browser), then test a page like:
 
 A Debian package allows you to install the script into `/usr/bin/` and the `.desktop` file into `/usr/share/applications/` with a fixed `Exec=` path that applies to all users.
 
-- **Sources**: [packages/flatpak-https-handler](/packages/flatpak-https-handler/) in this repository.
+- **Sources**: `flatpak-https-handler/` (Debian packaging) in this repository.
 - **Build the .deb** (from the repository root):
   ```bash
-  cd packages && chmod +x build-flatpak-https-handler.sh && ./build-flatpak-https-handler.sh
+  ./build-flatpak-https-handler.sh
   ```
-- **Install**: `sudo dpkg -i packages/flatpak-https-handler_1.0_all.deb` (dependencies: `curl`, `xdg-utils`). The **postinst** registers the handler automatically for the user who ran `sudo`. Other users need to run once:
+- **Install**: `sudo dpkg -i flatpak-https-handler_1.0_all.deb` (dependencies: `curl`, `xdg-utils`). The **postinst** registers the handler automatically for the user who ran `sudo`. Other users need to run once:
   `xdg-mime default flatpak-https-handler.desktop x-scheme-handler/flatpak+https`
 
 **Undo a manual installation (for testing the .deb)**: remove `~/.local/bin/flatpak-https-handler`, `~/.local/share/applications/flatpak-https-handler.desktop`, and the `x-scheme-handler/flatpak+https=...` line in `~/.config/mimeapps.list` (or use `sed -i '/x-scheme-handler\/flatpak+https=/d' ~/.config/mimeapps.list`).
@@ -135,7 +133,7 @@ To have the handler offered natively (without installing the package), the distr
 
 ### Propose the `.deb` for download
 
-The simplest path is to create a [GitHub release](https://github.com/phramusca/phramusca.github.io/releases), attach the `flatpak-https-handler_1.0_all.deb` file (built from the script under `packages/`), then add the download link to the repository README or the wiki.
+The simplest path is to create a [GitHub release](https://github.com/phramusca/phramusca.github.io/releases), attach the `flatpak-https-handler_1.0_all.deb` file (built by `build-flatpak-https-handler.sh`), then add the download link to the repository README or the wiki.
 
 ## Alternative: install from the command line
 
