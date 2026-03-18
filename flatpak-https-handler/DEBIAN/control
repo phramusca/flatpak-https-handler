@@ -1,0 +1,16 @@
+Package: flatpak-https-handler
+Version: 1.0
+Section: web
+Priority: optional
+Architecture: all
+Depends: curl, xdg-utils
+Maintainer: phramusca <phramusca@gmail.com>
+Description: Handler pour les URL flatpak+https (Flathub)
+ Ouvre les liens d'installation Flathub (schéma flatpak+https) dans
+ la logithèque au lieu de ne rien faire (utile sous Linux Mint et
+ autres distributions sans GNOME Software).
+ .
+ Le script postinst enregistre automatiquement le handler pour
+ l'utilisateur qui lance « sudo dpkg -i ». Les autres utilisateurs
+ peuvent lancer une fois :
+   xdg-mime default flatpak-https-handler.desktop x-scheme-handler/flatpak+https
