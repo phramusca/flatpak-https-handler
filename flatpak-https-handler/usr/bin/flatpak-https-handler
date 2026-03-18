@@ -1,6 +1,6 @@
 #!/bin/bash
-# Ouvre une URL flatpak+https en téléchargeant le .flatpakref et en le lançant
-# avec l'application par défaut (logithèque).
+# Open a flatpak+https URL by downloading the .flatpakref and opening it
+# with the default application (software center).
 if [[ "$1" != flatpak+https://* ]]; then
   echo "Usage: $0 flatpak+https://..." >&2
   exit 1
@@ -10,7 +10,7 @@ tmp=$(mktemp --suffix=.flatpakref)
 if curl -sSL -o "$tmp" "$url"; then
   xdg-open "$tmp"
 else
-  echo "Échec du téléchargement: $url" >&2
+  echo "Download failed: $url" >&2
   rm -f "$tmp"
   exit 1
 fi

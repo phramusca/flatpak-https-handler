@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=Flatpak (flatpak+https)
-Comment=Ouvre les liens d'installation Flathub dans la logithèque
+Comment=Open Flathub install links in the software center
 Exec=/usr/bin/flatpak-https-handler %u
 Terminal=false
 NoDisplay=true

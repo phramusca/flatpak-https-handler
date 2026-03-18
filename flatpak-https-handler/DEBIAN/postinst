@@ -3,18 +3,18 @@ set -e
 if command -v update-desktop-database >/dev/null 2>&1; then
   update-desktop-database /usr/share/applications 2>/dev/null || true
 fi
-# xdg-mime default est prévu pour une session utilisateur (D-Bus) et déconseillé en root.
-# On écrit donc directement dans mimeapps.list (même format que xdg-mime).
+# xdg-mime default is meant for a user session (D-Bus) and is discouraged when running as root.
+# So we write directly to mimeapps.list (same format as xdg-mime).
 if [ -n "$SUDO_UID" ] && [ -n "$SUDO_USER" ]; then
   real_home=$(getent passwd "$SUDO_USER" 2>/dev/null | cut -d: -f6)
-  if [ -n "$real_home" ] && [ -d "$real_home" ]; then
+    if [ -n "$real_home" ] && [ -d "$real_home" ]; then
     mimeapps="$real_home/.config/mimeapps.list"
     line="x-scheme-handler/flatpak+https=flatpak-https-handler.desktop"
     if [ -f "$mimeapps" ]; then
       if grep -q "x-scheme-handler/flatpak+https=" "$mimeapps" 2>/dev/null; then
-        : # déjà présent
+        : # already present
       elif grep -q '^\[Default Applications\]' "$mimeapps" 2>/dev/null; then
-        # Ajouter après la première section [Default Applications]
+        # Add after the first section [Default Applications]
         sed -i "/^\[Default Applications\]/a $line" "$mimeapps"
       else
         printf '\n[Default Applications]\n%s\n' "$line" >> "$mimeapps"
@@ -25,9 +25,9 @@ if [ -n "$SUDO_UID" ] && [ -n "$SUDO_USER" ]; then
     fi
     real_gid=$(getent passwd "$SUDO_USER" 2>/dev/null | cut -d: -f4)
 chown "$SUDO_UID:${real_gid:-$SUDO_UID}" "$mimeapps" 2>/dev/null || true
-    echo "Handler flatpak+https enregistré pour l'utilisateur $SUDO_USER."
+    echo "Handler flatpak+https registered for user $SUDO_USER."
     exit 0
   fi
 fi
-echo "Pour associer les liens flatpak+https à ce handler, exécutez (en tant qu'utilisateur) :"
+echo "To associate flatpak+https links with this handler, run (as a user):"
 echo "  xdg-mime default flatpak-https-handler.desktop x-scheme-handler/flatpak+https"
