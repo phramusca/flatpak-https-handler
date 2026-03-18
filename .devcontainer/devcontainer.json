@@ -15,6 +15,12 @@
       ]
     }
   },
+  "initializeCommand": "bash .devcontainer/init-ssh-agent.sh",
+  "mounts": [
+    "source=/tmp/flatpak-https-handler-ssh-agent.sock,target=/ssh-agent,type=bind"
+  ],
+  "remoteEnv": {
+    "SSH_AUTH_SOCK": "/ssh-agent"
+  },
   "remoteUser": "vscode"
 }
-
