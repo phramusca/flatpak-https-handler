@@ -14,7 +14,7 @@ cd packages && chmod +x build-flatpak-https-handler.sh && ./build-flatpak-https-
 
 Le paquet est créé : `packages/flatpak-https-handler_1.0_all.deb`.
 
-**Prérequis** : `fakeroot` (sinon `sudo apt install fakeroot`). Si `fakeroot` est absent, vous pouvez lancer `dpkg-deb --build flatpak-https-handler` depuis le dossier `packages/flatpak-https-handler/` (les permissions dans le .deb peuvent alors différer).
+**Prérequis** : `fakeroot` (sinon `sudo apt install fakeroot`).
 
 ### Installation
 
