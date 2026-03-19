@@ -6,10 +6,10 @@ Architecture: all
 Depends: curl, xdg-utils
 Maintainer: phramusca <phramusca@gmail.com>
 Description: Handler for flatpak+https URLs (Flathub)
-Opens Flathub install links (flatpak+https scheme) in the software center
-instead of doing nothing (useful on Linux Mint and other distributions
-without GNOME Software).
+ Opens Flathub install links (flatpak+https scheme) in the software center
+ instead of doing nothing (useful on Linux Mint and other distributions
+ without GNOME Software).
  .
-The postinst script automatically registers the handler for the user
-who ran « sudo dpkg -i ». Other users may run it once:
-  xdg-mime default flatpak-https-handler.desktop x-scheme-handler/flatpak+https
+ The postinst script automatically registers the handler for the user
+ who ran « sudo dpkg -i ». Other users may run it once:
+   xdg-mime default flatpak-https-handler.desktop x-scheme-handler/flatpak+https
